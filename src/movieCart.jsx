@@ -1,8 +1,8 @@
 import './movieCard.css';
 
-function MovieCard({ Title, Year, Type, Poster, imdbID }) {
+function MovieCard({ Title, Year, Type, Poster, imdbID, onClick }) {
     return (
-        <div className="movie-card">
+        <div className="movie-card" onClick={onClick} style={{ cursor: 'pointer' }}>
             <img src={Poster} alt={Title} className="poster" />
             <div className="movie-info">
                 <h3>{Title}</h3>

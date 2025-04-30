@@ -2,40 +2,50 @@
     position: fixed;
     top: 0;
     left: 0;
-    width: 100%;
-    height: 100%;
+    width: 100vw;
+    height: 100vh;
     background-color: rgba(0, 0, 0, 0.7);
     display: flex;
     justify-content: center;
     align-items: center;
     z-index: 1000;
-  }
-  
-  .modal {
+    animation: fadeOverlayIn 0.3s ease forwards;
+}
+
+.modal-overlay.closing {
+    animation: fadeOverlayOut 0.3s ease forwards;
+}
+
+.modal {
     background: white;
     padding: 20px;
     border-radius: 12px;
-    max-width: 500px;
     width: 90%;
+    max-width: 400px;
     position: relative;
-    box-shadow: 0 0 10px rgba(0,0,0,0.3);
-  }
-  
-  .modal img {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    max-height: 90vh;
+    overflow-y: auto;
+    text-align: center;
+}
+
+.modal img {
     width: 100%;
+    max-height: 400px;
+    object-fit: contain;
     border-radius: 8px;
     margin-bottom: 15px;
-  }
-  
-  .modal h2 {
+}
+
+.modal h2 {
     margin-top: 0;
-  }
-  
-  .modal p {
+}
+
+.modal p {
     margin: 6px 0;
-  }
-  
-  .close-btn {
+}
+
+.close-btn {
     position: absolute;
     top: 8px;
     right: 12px;
@@ -43,5 +53,56 @@
     background: transparent;
     border: none;
     cursor: pointer;
-  }
-  
+}
+
+@keyframes fadeInScale {
+    0% {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes fadeOutScale {
+    0% {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+    100% {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+}
+
+@keyframes fadeOverlayIn {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes fadeOverlayOut {
+    0% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+    }
+}
+
+.modal {
+    animation: fadeInScale 0.3s ease-out forwards;
+}
+
+.modal.closing {
+    animation: fadeOutScale 0.3s ease-in forwards;
+}

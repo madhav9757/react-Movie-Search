@@ -23,15 +23,32 @@ function App() {
     const [currentPage, setCurrentPage] = useState(1);
     const [selectedMovie, setSelectedMovie] = useState(null);
     const [showModal, setShowModal] = useState(false);
+    const [isClosing, setIsClosing] = useState(false);
 
+    // Show modal
     const handleCardClick = (imdbID) => {
         setLoading(true);
         fetchMovieDetails(imdbID).then(data => {
             setSelectedMovie(data);
             setShowModal(true);
+            setIsClosing(false); // 🔧 ensure not closing on open
             setLoading(false);
         });
     };
+
+    // Close modal
+    const handleCloseModal = () => {
+        setIsClosing(true); // 🔄 start closing
+        setTimeout(() => {
+            setShowModal(false); // 🔄 unmount AFTER animation
+            setSelectedMovie(null);
+        }, 300); // ⏱ match animation time
+    };
+
+    // Prevent scroll when modal open
+    useEffect(() => {
+        document.body.style.overflow = showModal ? 'hidden' : 'auto';
+    }, [showModal]);
 
     const handleClick = () => {
         setLoading(true);
@@ -79,7 +96,11 @@ function App() {
                         ))}
                     </div>
                     {showModal && (
-                        <MovieModal movie={selectedMovie} onClose={() => setShowModal(false)} />
+                        <MovieModal
+                            movie={selectedMovie}
+                            onClose={handleCloseModal}
+                            isClosing={isClosing}
+                        />
                     )}
 
                     <div className="pagination">
