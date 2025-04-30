@@ -43,3 +43,11 @@
     justify-content: center;
     margin-top: 20px;
 }
+
+@media (max-width: 700px) {
+    
+    .movie-card {
+        width: 100vw;
+    }
+
+}
