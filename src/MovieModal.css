@@ -17,92 +17,136 @@
 }
 
 .modal {
-    background: white;
-    padding: 20px;
-    border-radius: 12px;
-    width: 90%;
-    max-width: 400px;
-    position: relative;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    background: rgba(255, 255, 255, 0.95);
+    padding: 30px;
+    border-radius: 16px;
+    width: 95%;
+    max-width: 850px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
     max-height: 90vh;
     overflow-y: auto;
-    text-align: center;
+    position: relative;
+    animation: fadeInScale 0.3s ease-out forwards;
+    display: flex;
+    flex-direction: column;
 }
 
-.modal img {
+.modal.closing {
+    animation: fadeOutScale 0.3s ease-in forwards;
+}
+
+.modal-content {
+    display: flex;
+    gap: 30px;
+    align-items: flex-start;
+    flex-wrap: wrap;
+}
+
+.modal-image {
+    flex: 1;
+    max-width: 320px;
+}
+
+.modal-image img {
     width: 100%;
-    max-height: 400px;
-    object-fit: contain;
-    border-radius: 8px;
+    height: auto;
+    border-radius: 12px;
+    transition: transform 0.3s ease;
+}
+
+.modal-image img:hover {
+    transform: scale(1.02);
+}
+
+.modal-text {
+    flex: 2;
+    font-size: 15px;
+    color: #222;
+    line-height: 1.6;
+}
+
+.modal-text h2 {
+    margin-top: 0;
+    font-size: 26px;
     margin-bottom: 15px;
 }
 
-.modal h2 {
-    margin-top: 0;
-}
-
-.modal p {
-    margin: 6px 0;
+.modal-text p {
+    margin: 8px 0;
 }
 
 .close-btn {
     position: absolute;
-    top: 8px;
-    right: 12px;
-    font-size: 24px;
-    background: transparent;
+    top: 12px;
+    right: 18px;
+    font-size: 28px;
+    background: none;
     border: none;
     cursor: pointer;
+    color: #444;
+    transition: color 0.2s;
 }
 
+.close-btn:hover {
+    color: #000;
+}
+
+/* Animations */
 @keyframes fadeInScale {
-    0% {
+    from {
         opacity: 0;
         transform: scale(0.95);
     }
 
-    100% {
+    to {
         opacity: 1;
         transform: scale(1);
     }
 }
 
 @keyframes fadeOutScale {
-    0% {
+    from {
         opacity: 1;
         transform: scale(1);
     }
 
-    100% {
+    to {
         opacity: 0;
         transform: scale(0.95);
     }
 }
 
 @keyframes fadeOverlayIn {
-    0% {
+    from {
         opacity: 0;
     }
 
-    100% {
+    to {
         opacity: 1;
     }
 }
 
 @keyframes fadeOverlayOut {
-    0% {
+    from {
         opacity: 1;
     }
 
-    100% {
+    to {
         opacity: 0;
     }
 }
 
-.modal {
-    animation: fadeInScale 0.3s ease-out forwards;
-}
+/* Responsive Design */
+@media (max-width: 700px) {
+    .modal-content {
+        flex-direction: column;
+    }
 
-.modal.closing {
-    animation: fadeOutScale 0.3s ease-in forwards;
+    .modal-image {
+        max-width: 100%;
+    }
+
+    .modal-text h2 {
+        font-size: 22px;
+    }
 }
