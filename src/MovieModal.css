@@ -138,13 +138,19 @@
 
 /* Responsive Design */
 @media (max-width: 700px) {
+
+    .modal {
+        margin: 20px;
+    }
+
     .modal-content {
         flex-direction: column;
     }
 
     .modal-image {
-        max-width: 100%;
+        display: none;
     }
+
 
     .modal-text h2 {
         font-size: 22px;
